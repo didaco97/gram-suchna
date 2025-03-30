@@ -1,10 +1,8 @@
-
 import { useEffect, useState } from 'react';
 import { User } from 'lucide-react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import LocationInput from '@/components/LocationInput';
-import ApiKeyInput from '@/components/ApiKeyInput';
 import LoadingState from '@/components/LoadingState';
 import ErrorState from '@/components/ErrorState';
 import PageHeader from '@/components/PageHeader';
@@ -22,18 +20,15 @@ interface SchemeItem {
 
 const parseSchemes = (rawText: string): SchemeItem[] => {
   try {
-    // Split by numbered items (1., 2., etc.)
     const itemRegex = /\d+\.\s+(.*?)(?=\d+\.|$)/gs;
     const matches = [...rawText.matchAll(itemRegex)];
     
     return matches.map(match => {
       const itemText = match[1].trim();
       
-      // Try to extract title and sections
       const titleMatch = itemText.match(/^(.+?)(?::|\.)/);
       const title = titleMatch ? titleMatch[1].trim() : "Healthcare Program";
       
-      // Extract description (everything before Eligibility if it exists)
       let description = itemText;
       const eligibilityIndex = itemText.indexOf("Eligibility");
       const howToApplyIndex = itemText.indexOf("How to Apply");
@@ -44,19 +39,16 @@ const parseSchemes = (rawText: string): SchemeItem[] => {
         description = itemText.substring(0, howToApplyIndex).trim();
       }
       
-      // Remove the title from the description
       description = titleMatch 
         ? description.substring(titleMatch[0].length).trim() 
         : description;
       
-      // Extract eligibility if it exists
       let eligibility;
       if (eligibilityIndex > -1) {
         const endIndex = howToApplyIndex > -1 ? howToApplyIndex : itemText.length;
         eligibility = itemText.substring(eligibilityIndex, endIndex).replace(/Eligibility:?\s*/i, '').trim();
       }
       
-      // Extract how to apply if it exists
       let howToApply;
       if (howToApplyIndex > -1) {
         howToApply = itemText.substring(howToApplyIndex).replace(/How to Apply:?\s*/i, '').trim();
@@ -72,7 +64,6 @@ const parseSchemes = (rawText: string): SchemeItem[] => {
   } catch (error) {
     console.error("Error parsing healthcare programs:", error);
     
-    // Fallback: just return the raw text as a single item
     return [{
       title: "Healthcare Programs",
       description: rawText
@@ -127,8 +118,6 @@ const Healthcare = () => {
         <div className="mb-6">
           <LocationInput onSave={() => fetchPrograms()} />
         </div>
-        
-        <ApiKeyInput />
         
         {loading ? (
           <LoadingState message="Fetching healthcare programs" />
