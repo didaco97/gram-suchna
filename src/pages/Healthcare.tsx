@@ -84,7 +84,7 @@ const Healthcare = () => {
     try {
       const apiKey = localStorage.getItem('perplexityApiKey');
       if (!apiKey) {
-        setError("Please add your Perplexity API key to fetch healthcare programs.");
+        setError("Problem Fetching healthcare programs.");
         setLoading(false);
         return;
       }
