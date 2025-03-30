@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,20 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Ghibli-inspired color palette
+				ghibli: {
+					'green-light': '#D7E7D0',
+					'green': '#9BBB8B',
+					'green-dark': '#718C5A',
+					'blue-light': '#D2E4F0',
+					'blue': '#86B8DC',
+					'blue-dark': '#5E8CAF',
+					'earth': '#E6CCAF',
+					'brown': '#C4A484',
+					'cream': '#F5F1E6',
+					'pink': '#F4D2D2',
+					'yellow': '#F3E7A8'
 				}
 			},
 			borderRadius: {
@@ -84,11 +99,25 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'sway': {
+					'0%, 100%': { transform: 'rotate(-3deg)' },
+					'50%': { transform: 'rotate(3deg)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'sway': 'sway 6s ease-in-out infinite'
+			},
+			backgroundImage: {
+				'ghibli-gradient': 'linear-gradient(to bottom, #D7E7D0, #F5F1E6)',
+				'ghibli-clouds': "url('/clouds-bg.png')"
 			}
 		}
 	},
