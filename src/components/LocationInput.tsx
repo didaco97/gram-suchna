@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +16,7 @@ const LocationInput = ({ className, onSave }: LocationInputProps) => {
     return localStorage.getItem('userLocation') || '';
   });
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -39,7 +40,7 @@ const LocationInput = ({ className, onSave }: LocationInputProps) => {
     }
 
     // Redirect to news page if on home
-    if (location.pathname === '/') {
+    if (pathname === '/') {
       navigate('/news');
     }
 
