@@ -40,9 +40,12 @@ const parseNewsItems = (rawText: string): NewsItem[] => {
       const title = titleMatch ? titleMatch[1].trim() : "News Update";
       
       // Remove the title from the content if found
-      const content = titleMatch 
+      let content = titleMatch 
         ? itemText.substring(titleMatch[0].length).trim() 
         : itemText;
+      
+      // Convert **text** to <strong>text</strong> for bold formatting
+      content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
       
       // Try to extract date and source if they exist
       const dateMatch = content.match(/Date:?\s*([^,\.]+)/i);
@@ -64,7 +67,7 @@ const parseNewsItems = (rawText: string): NewsItem[] => {
     // Fallback: just return the raw text as a single item
     return [{
       title: "Local News Update",
-      content: rawText
+      content: rawText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     }];
   }
 };

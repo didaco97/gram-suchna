@@ -26,7 +26,11 @@ const InfoCard = ({ title, content, icon, date, source, className, index }: Info
     }
     
     return paragraphs.map((para, idx) => (
-      <p key={idx} className="mb-3 text-gray-700">{para}</p>
+      <p 
+        key={idx} 
+        className="mb-3 text-gray-700"
+        dangerouslySetInnerHTML={{ __html: para }}
+      />
     ));
   };
 
