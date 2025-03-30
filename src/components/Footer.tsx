@@ -17,10 +17,10 @@ const Footer = () => {
                   target.src = 'https://via.placeholder.com/32?text=LG';
                 }}
               />
-              <h3 className="ml-2 text-lg font-bold text-ghibli-green-dark">LocalGhibli</h3>
+              <h3 className="ml-2 text-lg font-bold text-ghibli-green-dark">GramSuchna</h3>
             </div>
             <p className="text-sm text-gray-600 mb-4">
-              Bringing local news and government scheme information with a touch of Ghibli magic.
+              Bringing local news and government scheme information.
             </p>
           </div>
           
@@ -83,10 +83,10 @@ const Footer = () => {
         
         <div className="border-t border-ghibli-green-light pt-4 mt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-600">
-            &copy; {new Date().getFullYear()} LocalGhibli. All rights reserved.
+            &copy; {new Date().getFullYear()} Dhiraj Dahale.
           </p>
           <p className="text-sm text-gray-500 mt-2 md:mt-0">
-            Inspired by Studio Ghibli. Not affiliated with Studio Ghibli.
+            Developed By Dhiraj.D. AVCOE.
           </p>
         </div>
       </div>
