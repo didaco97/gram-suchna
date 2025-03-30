@@ -1,13 +1,10 @@
-
 import { useToast } from "@/components/ui/use-toast";
 
 // Define constant for the API endpoint
 const API_ENDPOINT = 'https://api.perplexity.ai/chat/completions';
 
-// Function to get API key from localStorage
-const getApiKey = () => {
-  return localStorage.getItem('perplexityApiKey');
-};
+// Hardcoded API key - replace with your actual key
+const API_KEY = 'pplx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
 
 // Function to get location from localStorage
 const getLocation = () => {
@@ -20,7 +17,7 @@ interface PerplexityRequestOptions {
 }
 
 export const fetchFromPerplexity = async ({ message, systemPrompt = 'Be precise and concise.' }: PerplexityRequestOptions) => {
-  const apiKey = getApiKey();
+  const apiKey = API_KEY;
   
   if (!apiKey) {
     throw new Error('No Perplexity API key found. Please add your API key in settings.');

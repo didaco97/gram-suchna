@@ -1,10 +1,8 @@
-
 import { useEffect, useState } from 'react';
 import { Home } from 'lucide-react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import LocationInput from '@/components/LocationInput';
-import ApiKeyInput from '@/components/ApiKeyInput';
 import LoadingState from '@/components/LoadingState';
 import ErrorState from '@/components/ErrorState';
 import PageHeader from '@/components/PageHeader';
@@ -91,13 +89,6 @@ const Agriculture = () => {
     setError(null);
     
     try {
-      const apiKey = localStorage.getItem('perplexityApiKey');
-      if (!apiKey) {
-        setError("Please add your Perplexity API key to fetch agriculture schemes.");
-        setLoading(false);
-        return;
-      }
-      
       const rawData = await fetchAgricultureSchemes();
       const parsedSchemes = parseSchemes(rawData);
       setSchemes(parsedSchemes);
@@ -127,8 +118,6 @@ const Agriculture = () => {
         <div className="mb-6">
           <LocationInput onSave={() => fetchSchemes()} />
         </div>
-        
-        <ApiKeyInput />
         
         {loading ? (
           <LoadingState message="Fetching agriculture schemes" />

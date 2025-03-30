@@ -1,16 +1,23 @@
 
 import { useEffect, useState } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { FileText } from 'lucide-react';
+import { FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import LocationInput from '@/components/LocationInput';
 import InfoCard from '@/components/InfoCard';
-import ApiKeyInput from '@/components/ApiKeyInput';
 import LoadingState from '@/components/LoadingState';
 import ErrorState from '@/components/ErrorState';
 import PageHeader from '@/components/PageHeader';
 import { fetchLocalNews } from '@/api/perplexityApi';
+import { 
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext
+} from "@/components/ui/carousel";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 type NewsItem = {
   title: string;
@@ -74,13 +81,6 @@ const News = () => {
     setError(null);
     
     try {
-      const apiKey = localStorage.getItem('perplexityApiKey');
-      if (!apiKey) {
-        setError("Please add your Perplexity API key to fetch news.");
-        setLoading(false);
-        return;
-      }
-      
       const rawNewsData = await fetchLocalNews();
       const parsedNews = parseNewsItems(rawNewsData);
       setNewsItems(parsedNews);
@@ -111,24 +111,55 @@ const News = () => {
           <LocationInput onSave={() => fetchNews()} />
         </div>
         
-        <ApiKeyInput />
-        
         {loading ? (
           <LoadingState message="Fetching local news" />
         ) : error ? (
           <ErrorState message={error} onRetry={fetchNews} />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {newsItems.map((item, index) => (
-              <InfoCard
-                key={index}
-                title={item.title}
-                content={item.content}
-                date={item.date}
-                source={item.source}
-              />
-            ))}
-          </div>
+          <>
+            {/* Mobile view: Vertically scrolling cards */}
+            {isMobile ? (
+              <ScrollArea className="h-[60vh]">
+                <div className="space-y-5 animate-fade-in">
+                  {newsItems.map((item, index) => (
+                    <InfoCard
+                      key={index}
+                      title={item.title}
+                      content={item.content}
+                      date={item.date}
+                      source={item.source}
+                      index={index}
+                      className="hover-scale"
+                    />
+                  ))}
+                </div>
+              </ScrollArea>
+            ) : (
+              /* Desktop view: Carousel */
+              <div className="py-4">
+                <Carousel className="w-full">
+                  <CarouselContent>
+                    {newsItems.map((item, index) => (
+                      <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
+                        <div className="p-1 h-full">
+                          <InfoCard
+                            title={item.title}
+                            content={item.content}
+                            date={item.date}
+                            source={item.source}
+                            index={index}
+                            className="h-full"
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="left-0" />
+                  <CarouselNext className="right-0" />
+                </Carousel>
+              </div>
+            )}
+          </>
         )}
       </main>
       
