@@ -1,7 +1,8 @@
 
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { FileText, ChevronLeft, ChevronRight } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import LocationInput from '@/components/LocationInput';
@@ -73,11 +74,12 @@ const parseNewsItems = (rawText: string): NewsItem[] => {
 };
 
 const News = () => {
+  const { t } = useTranslation();
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const isMobile = useIsMobile();
-  const userLocation = localStorage.getItem('userLocation') || 'your area';
+  const userLocation = localStorage.getItem('userLocation') || t('location.placeholder');
 
   const fetchNews = async () => {
     setLoading(true);
@@ -105,8 +107,8 @@ const News = () => {
       
       <main className="flex-grow container mx-auto px-4 py-8">
         <PageHeader 
-          title="Local News" 
-          description={`Stay updated with the latest news and events happening in ${userLocation}.`}
+          title={t('pages.news.title')}
+          description={t('pages.news.description', { location: userLocation })}
           icon={<FileText className="h-6 w-6" />}
         />
         
@@ -115,7 +117,7 @@ const News = () => {
         </div>
         
         {loading ? (
-          <LoadingState message="Fetching local news" />
+          <LoadingState message={t('pages.news.loadingMessage')} />
         ) : error ? (
           <ErrorState message={error} onRetry={fetchNews} />
         ) : (

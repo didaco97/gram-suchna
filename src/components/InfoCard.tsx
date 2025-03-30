@@ -1,5 +1,6 @@
 
 import { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 
 interface InfoCardProps {
@@ -13,6 +14,8 @@ interface InfoCardProps {
 }
 
 const InfoCard = ({ title, content, icon, date, source, className, index }: InfoCardProps) => {
+  const { t } = useTranslation();
+  
   // Format content: Split paragraphs and add spacing
   const formatContent = (text: string) => {
     // Split by periods followed by a space or newline
@@ -60,8 +63,8 @@ const InfoCard = ({ title, content, icon, date, source, className, index }: Info
       
       {(date || source) && (
         <CardFooter className="pt-2 border-t border-ghibli-green-light/30 text-sm text-gray-500 flex flex-col items-start">
-          {date && <span className="mb-1">Date: {date}</span>}
-          {source && <span>Source: {source}</span>}
+          {date && <span className="mb-1">{t('common.date')}: {date}</span>}
+          {source && <span>{t('common.source')}: {source}</span>}
         </CardFooter>
       )}
     </Card>

@@ -1,4 +1,6 @@
+
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Info } from 'lucide-react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
@@ -79,10 +81,11 @@ const parseSchemes = (rawText: string): SchemeItem[] => {
 };
 
 const Education = () => {
+  const { t } = useTranslation();
   const [schemes, setSchemes] = useState<SchemeItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const userLocation = localStorage.getItem('userLocation') || 'your area';
+  const userLocation = localStorage.getItem('userLocation') || t('location.placeholder');
 
   const fetchOpportunities = async () => {
     setLoading(true);
@@ -110,8 +113,8 @@ const Education = () => {
       
       <main className="flex-grow container mx-auto px-4 py-8">
         <PageHeader 
-          title="Education Opportunities" 
-          description={`Discover scholarships, educational schemes, and learning resources available in ${userLocation}.`}
+          title={t('pages.education.title')}
+          description={t('pages.education.description', { location: userLocation })}
           icon={<Info className="h-6 w-6" />}
         />
         
@@ -120,13 +123,13 @@ const Education = () => {
         </div>
         
         {loading ? (
-          <LoadingState message="Fetching education opportunities" />
+          <LoadingState message={t('pages.education.loadingMessage')} />
         ) : error ? (
           <ErrorState message={error} onRetry={fetchOpportunities} />
         ) : (
           <SchemeList 
             schemes={schemes} 
-            emptyMessage="No education opportunities found for your location."
+            emptyMessage={t('pages.education.emptyMessage')}
           />
         )}
       </main>

@@ -1,0 +1,102 @@
+
+{
+  "site": {
+    "title": "Local News & Government Schemes",
+    "description": "Stay informed about local news and government opportunities in your area."
+  },
+  "common": {
+    "getStarted": "Get Started",
+    "loading": "Loading...",
+    "retry": "Retry",
+    "error": "An error occurred",
+    "noResults": "No results found",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "date": "Date",
+    "source": "Source",
+    "deadline": "Deadline",
+    "eligibility": "Eligibility",
+    "howToApply": "How to Apply"
+  },
+  "nav": {
+    "home": "Home",
+    "news": "Local News",
+    "agriculture": "Agriculture",
+    "healthcare": "Healthcare",
+    "education": "Education",
+    "financial": "Financial Aid"
+  },
+  "location": {
+    "title": "Your Location",
+    "placeholder": "Enter your city or region",
+    "save": "Save Location",
+    "current": "Your current location"
+  },
+  "pages": {
+    "home": {
+      "heroTitle": "Local News & Government Schemes",
+      "heroSubtitle": "Stay informed about local news and government opportunities in your area. Enter your location to discover relevant schemes in agriculture, healthcare, education, and financial aid.",
+      "exploreCategories": "Explore Categories",
+      "categoriesSubtitle": "Access the latest information across different sectors that matter to you",
+      "howItWorks": "How It Works",
+      "howItWorksSubtitle": "Our platform makes it easy to stay informed about your local area",
+      "step1": "Enter Your Location",
+      "step1Desc": "Provide your city or region to get locally relevant information",
+      "step2": "Browse Categories",
+      "step2Desc": "Explore different categories based on your interests and needs",
+      "step3": "Stay Informed",
+      "step3Desc": "Get up-to-date information on news and government schemes"
+    },
+    "news": {
+      "title": "Local News",
+      "description": "Stay updated with the latest news and events happening in {location}.",
+      "loadingMessage": "Fetching local news"
+    },
+    "agriculture": {
+      "title": "Agriculture Schemes",
+      "description": "Discover government schemes, subsidies, and opportunities available for farmers in {location}.",
+      "loadingMessage": "Fetching agriculture schemes",
+      "emptyMessage": "No agriculture schemes found for your location."
+    },
+    "education": {
+      "title": "Education Opportunities",
+      "description": "Discover scholarships, educational schemes, and learning resources available in {location}.",
+      "loadingMessage": "Fetching education opportunities",
+      "emptyMessage": "No education opportunities found for your location."
+    },
+    "healthcare": {
+      "title": "Healthcare Programs",
+      "description": "Explore healthcare schemes, medical facilities, and wellness programs in {location}.",
+      "loadingMessage": "Fetching healthcare programs",
+      "emptyMessage": "No healthcare programs found for your location."
+    },
+    "financial": {
+      "title": "Financial Aid",
+      "description": "Find loans, subsidies, and financial assistance programs available in {location}.",
+      "loadingMessage": "Fetching financial aid programs",
+      "emptyMessage": "No financial aid programs found for your location."
+    }
+  },
+  "categories": {
+    "news": {
+      "description": "Stay updated with the latest news and events happening in your area."
+    },
+    "agriculture": {
+      "description": "Access information about farming subsidies, schemes, and opportunities."
+    },
+    "healthcare": {
+      "description": "Learn about healthcare programs, facilities, and medical services."
+    },
+    "education": {
+      "description": "Discover educational schemes, scholarships, and learning resources."
+    },
+    "financial": {
+      "description": "Find financial assistance, loans, and economic support programs."
+    }
+  },
+  "footer": {
+    "madeWith": "Made with",
+    "poweredBy": "Powered by"
+  }
+}

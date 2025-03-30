@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useIsMobile } from '@/hooks/use-mobile';
 import InfoCard from './InfoCard';
 import { Badge } from "@/components/ui/badge";
@@ -28,6 +29,7 @@ interface SchemeListProps {
 }
 
 const SchemeList = ({ schemes, emptyMessage = "No schemes available for your location." }: SchemeListProps) => {
+  const { t } = useTranslation();
   const isMobile = useIsMobile();
 
   if (!schemes || schemes.length === 0) {
@@ -55,7 +57,7 @@ const SchemeList = ({ schemes, emptyMessage = "No schemes available for your loc
         {scheme.eligibility && (
           <div className="bg-ghibli-cream/30 p-3 rounded-md">
             <div className="flex items-center gap-2 mb-1">
-              <Badge variant="outline" className="bg-ghibli-cream text-ghibli-brown font-medium">Eligibility</Badge>
+              <Badge variant="outline" className="bg-ghibli-cream text-ghibli-brown font-medium">{t('common.eligibility')}</Badge>
             </div>
             <p className="text-sm text-gray-700">{scheme.eligibility}</p>
           </div>
@@ -64,7 +66,7 @@ const SchemeList = ({ schemes, emptyMessage = "No schemes available for your loc
         {scheme.howToApply && (
           <div className="bg-ghibli-blue-light/20 p-3 rounded-md">
             <div className="flex items-center gap-2 mb-1">
-              <Badge variant="outline" className="bg-ghibli-blue-light text-ghibli-blue-dark font-medium">How to Apply</Badge>
+              <Badge variant="outline" className="bg-ghibli-blue-light text-ghibli-blue-dark font-medium">{t('common.howToApply')}</Badge>
             </div>
             <p className="text-sm text-gray-700">{scheme.howToApply}</p>
           </div>
@@ -73,10 +75,10 @@ const SchemeList = ({ schemes, emptyMessage = "No schemes available for your loc
       
       <div className="mt-4 pt-4 border-t border-ghibli-green-light/50 text-sm text-gray-500 flex justify-between items-center">
         {scheme.deadline && (
-          <span>Deadline: {scheme.deadline}</span>
+          <span>{t('common.deadline')}: {scheme.deadline}</span>
         )}
         {scheme.source && (
-          <span>Source: {scheme.source}</span>
+          <span>{t('common.source')}: {scheme.source}</span>
         )}
       </div>
     </div>
