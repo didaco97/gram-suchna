@@ -1,10 +1,6 @@
+
 import { useToast } from "@/components/ui/use-toast";
-
-// Define constant for the API endpoint
-const API_ENDPOINT = 'https://api.perplexity.ai/chat/completions';
-
-// Hardcoded API key
-const API_KEY = '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';
+import { supabase } from "@/integrations/supabase/client";
 
 // Function to get location from localStorage
 const getLocation = () => {
@@ -20,38 +16,19 @@ export const fetchFromPerplexity = async ({ message, systemPrompt = 'Be precise 
   const location = getLocation();
   
   try {
-    const response = await fetch(API_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'llama-3.1-sonar-small-128k-online',
-        messages: [
-          {
-            role: 'system',
-            content: systemPrompt
-          },
-          {
-            role: 'user',
-            content: `${message} for ${location}.`
-          }
-        ],
-        temperature: 0.2,
-        top_p: 0.9,
-        max_tokens: 1000,
-        search_recency_filter: 'month'
-      }),
+    const { data, error } = await supabase.functions.invoke('perplexity', {
+      body: {
+        message,
+        systemPrompt,
+        userLocation: location
+      }
     });
     
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`API request failed: ${response.status} - ${errorText}`);
+    if (error) {
+      throw new Error(`Edge function error: ${error.message}`);
     }
     
-    const data = await response.json();
-    return data.choices[0].message.content;
+    return data.content;
   } catch (error) {
     console.error('Error fetching from Perplexity:', error);
     throw error;

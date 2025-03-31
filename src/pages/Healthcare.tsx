@@ -82,13 +82,6 @@ const Healthcare = () => {
     setError(null);
     
     try {
-      const apiKey = localStorage.getItem('perplexityApiKey');
-      if (!apiKey) {
-        setError("Problem Fetching healthcare programs.");
-        setLoading(false);
-        return;
-      }
-      
       const rawData = await fetchHealthcarePrograms();
       const parsedSchemes = parseSchemes(rawData);
       setSchemes(parsedSchemes);
